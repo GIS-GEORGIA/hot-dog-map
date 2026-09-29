@@ -1,0 +1,139 @@
+:root {
+  --bg: #f8fafc;
+  --fg: #0f172a;
+  --panel: #ffffff;
+  --border: #e2e8f0;
+  --accent: #dc2626;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0f172a;
+  --fg: #e2e8f0;
+  --panel: #1e293b;
+  --border: #334155;
+  --accent: #f87171;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  font-family: 'Segoe UI', 'BPG Nino Mtavruli', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+#app {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+}
+
+.topbar {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+}
+
+.brand {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.controls select,
+.controls button {
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+}
+
+.sidebar {
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.sidebar.collapsed {
+  display: none;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.stats .total {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.filters label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+.popup-title {
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+}
+
+.popup-desc {
+  font-size: 0.85rem;
+  margin: 0.3rem 0;
+}
+
+.popup-nav {
+  display: inline-block;
+  margin-top: 0.4rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 640px) {
+  #app {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    position: fixed;
+    top: 52px;
+    left: 0;
+    bottom: 0;
+    width: 260px;
+    z-index: 999;
+  }
+}
