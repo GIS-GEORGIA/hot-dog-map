@@ -31,6 +31,8 @@ function walk(el, folderPath, out) {
       const coordsText = text(point, 'coordinates')
       const [lng, lat] = coordsText.split(',').map(Number)
       if (Number.isNaN(lng) || Number.isNaN(lat)) continue
+      const description = text(child, 'description')
+      const seasonMatch = description.match(/[სს]ეზონი\s*(\d+)\s*სერია\s*(\d+)/)
       out.push({
         type: 'Feature',
         geometry: { type: 'Point', coordinates: [lng, lat] },
@@ -39,7 +41,9 @@ function walk(el, folderPath, out) {
           title_ka: text(child, 'name'),
           title_en: '',
           category: folderPath[folderPath.length - 1] || 'ზოგადი',
-          description_ka: text(child, 'description'),
+          season: seasonMatch ? Number(seasonMatch[1]) : null,
+          episode: seasonMatch ? Number(seasonMatch[2]) : null,
+          description_ka: description,
           description_en: '',
           image_url: ''
         }
